@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('insights');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} | Apex Hotel Furniture`} description={post.data.description} image={post.data.image} type="article">
+  <article>
+    <!-- Article Header -->
+    <header class="relative py-24 bg-gray-900 text-white text-center overflow-hidden">
+       <div class="absolute inset-0 z-0 opacity-40">
+          <img src={post.data.image} alt="" class="w-full h-full object-cover blur-sm" />
+       </div>
+       <div class="relative z-10 container mx-auto px-6 max-w-4xl">
+          <div class="flex items-center justify-center space-x-2 text-sm font-medium mb-6 text-secondary uppercase tracking-wider">
+            {post.data.tags && post.data.tags.map((tag) => (
+              <span>#{tag}</span>
+            ))}
+          </div>
+          <h1 class="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">{post.data.title}</h1>
+          <div class="flex items-center justify-center space-x-4 text-gray-300">
+             <span>{post.data.author}</span>
+             <span>&bull;</span>
+             <span>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          </div>
+       </div>
+    </header>
+
+    <!-- Article Content -->
+    <div class="container mx-auto px-6 py-16">
+       <div class="max-w-3xl mx-auto">
+          <div class="prose prose-lg prose-stone prose-headings:font-serif prose-a:text-secondary hover:prose-a:text-primary">
+             <Content />
+          </div>
+
+          <!-- Share / Navigation -->
+          <div class="mt-16 pt-8 border-t flex justify-between items-center">
+            <a href="/insights" class="text-gray-500 hover:text-secondary flex items-center font-medium">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+              Back to Insights
+            </a>
+          </div>
+       </div>
+    </div>
+  </article>
+</Layout>

@@ -1,0 +1,75 @@
+---
+import { siteConfig } from '../site.config';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-primary text-white pt-16 pb-8">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      
+      <!-- Company Info -->
+      <div>
+        <h3 class="text-xl font-serif font-bold mb-6 text-secondary">Company</h3>
+        <ul class="space-y-4 text-gray-300 text-sm">
+          <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
+          <li><a href="/projects" class="hover:text-white transition-colors">Projects</a></li>
+          <li><a href="/insights" class="hover:text-white transition-colors">Insights</a></li>
+          <li><a href="/contact" class="hover:text-white transition-colors">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Hotel Furniture -->
+      <div>
+        <h3 class="text-xl font-serif font-bold mb-6 text-secondary">Hotel Furniture</h3>
+        <ul class="space-y-4 text-gray-300 text-sm">
+          <li><a href="/catalog/bedroom" class="hover:text-white transition-colors">Bedroom</a></li>
+          <li><a href="/catalog/lobby" class="hover:text-white transition-colors">Lobby</a></li>
+          <li><a href="/catalog/restaurant" class="hover:text-white transition-colors">Restaurant</a></li>
+          <li><a href="/catalog/outdoor" class="hover:text-white transition-colors">Outdoor</a></li>
+          <li><a href="/catalog/custom" class="hover:text-white transition-colors">Custom</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h3 class="text-xl font-serif font-bold mb-6 text-secondary">Resources</h3>
+        <ul class="space-y-4 text-gray-300 text-sm">
+          <li><a href="/insights/buying-guides" class="hover:text-white transition-colors">Buying Guides</a></li>
+          <li><a href="/insights/material-knowledge" class="hover:text-white transition-colors">Material Knowledge</a></li>
+          <li><a href="/insights/design-trends" class="hover:text-white transition-colors">Design Trends</a></li>
+          <li><a href="/faq" class="hover:text-white transition-colors">FAQs</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-xl font-serif font-bold mb-6 text-secondary">Contact Us</h3>
+        <ul class="space-y-4 text-gray-300 text-sm">
+          <li class="flex items-start">
+            <span class="font-bold min-w-[60px]">Email:</span>
+            <a href={`mailto:${siteConfig.contact.email}`} class="hover:text-secondary">{siteConfig.contact.email}</a>
+          </li>
+          <li class="flex items-start">
+            <span class="font-bold min-w-[60px]">Phone:</span>
+            <a href={`tel:${siteConfig.contact.phone}`} class="hover:text-secondary">{siteConfig.contact.phone}</a>
+          </li>
+          <li class="flex items-start">
+            <span class="font-bold min-w-[60px]">Add:</span>
+            <span>{siteConfig.contact.address}</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="border-t border-gray-800 pt-8 mt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+      <p>&copy; {currentYear} {siteConfig.name}. All rights reserved.</p>
+      <div class="flex space-x-6 mt-4 md:mt-0">
+        <a href="/privacy" class="hover:text-white">Privacy Policy</a>
+        <a href="/terms" class="hover:text-white">Terms Of Use</a>
+        <a href="/sitemap-index.xml" class="hover:text-white">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>

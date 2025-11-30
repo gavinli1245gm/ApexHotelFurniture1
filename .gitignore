@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.astro/
+
+# Environment variables
+.env
+.env.production
+.env.development
+
+# macOS
+.DS_Store
+
+# Admin Tool (Local only)
+src/pages/admin/
+src/pages/api/config.ts
+
+# Keep src/data/config.json in git!

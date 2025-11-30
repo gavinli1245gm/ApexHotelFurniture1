@@ -1,0 +1,150 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const milestones = [
+  { year: "2008", title: "Founded", description: "Apex Hotel Furniture established in Foshan, China." },
+  { year: "2012", title: "Global Expansion", description: "Started exporting to North American and European markets." },
+  { year: "2015", title: "New Facility", description: "Moved to a 20,000 sqm modern manufacturing facility." },
+  { year: "2020", title: "Award Winning", description: "Recognized as Top 10 Hotel Furniture Manufacturer in China." },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Apex Hotel Furniture",
+    "foundingDate": "2008",
+    "description": "Premier manufacturer specializing in custom furniture for the hospitality industry.",
+    "location": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Foshan",
+        "addressRegion": "Guangdong",
+        "addressCountry": "CN"
+      }
+    }
+  }
+};
+---
+
+<Layout 
+  title="About Apex Hotel Furniture | 15+ Years Manufacturing Excellence" 
+  description="Learn about our 20,000 sqm factory, German machinery, and 15-year history of crafting furniture for 5-star hotels worldwide."
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="relative py-24 bg-gray-900 flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-30">
+       <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=1920&q=80" alt="Factory" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative z-10 text-center max-w-4xl px-6">
+      <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Crafting Excellence Since 2008</h1>
+      <p class="text-gray-300 text-xl">We are more than just a manufacturer; we are your strategic partner in hospitality design.</p>
+    </div>
+  </section>
+
+  <!-- Company Profile -->
+  <section class="py-20">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+         <div>
+            <h2 class="text-3xl font-serif font-bold text-primary mb-6">Company Profile</h2>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Apex Hotel Furniture is a premier manufacturer specializing in custom furniture for the hospitality industry. Located in Foshan, the furniture capital of China, we have spent over 15 years refining our craft to serve 5-star hotels, boutique resorts, and high-end restaurants worldwide.
+            </p>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Our 20,000 square meter facility is equipped with state-of-the-art German machinery, allowing us to combine precision engineering with artisanal hand-finishing. From prototype to mass production, every step is monitored by our quality control team to ensure adherence to international standards.
+            </p>
+            <div class="grid grid-cols-3 gap-8 mt-8 border-t pt-8">
+               <div>
+                 <span class="block text-3xl font-bold text-secondary mb-1">15+</span>
+                 <span class="text-sm text-gray-500">Years Experience</span>
+               </div>
+               <div>
+                 <span class="block text-3xl font-bold text-secondary mb-1">500+</span>
+                 <span class="text-sm text-gray-500">Projects Completed</span>
+               </div>
+               <div>
+                 <span class="block text-3xl font-bold text-secondary mb-1">50+</span>
+                 <span class="text-sm text-gray-500">Countries Served</span>
+               </div>
+            </div>
+         </div>
+         <div class="grid grid-cols-2 gap-4">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" class="rounded-lg shadow-md translate-y-8" alt="Worker" />
+            <img src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=600&q=80" class="rounded-lg shadow-md" alt="Design" />
+         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-serif font-bold text-primary mb-4">Our Journey</h2>
+        <div class="w-20 h-1 bg-secondary mx-auto"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {milestones.map((item) => (
+          <div class="bg-white p-8 rounded-lg shadow-sm border-t-4 border-secondary text-center">
+            <span class="block text-4xl font-bold text-gray-200 mb-4">{item.year}</span>
+            <h3 class="text-xl font-bold text-primary mb-2">{item.title}</h3>
+            <p class="text-gray-600 text-sm">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Manufacturing Process -->
+  <section class="py-20">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-serif font-bold text-primary mb-4">Manufacturing Process</h2>
+        <p class="text-gray-600">How we bring your designs to life.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+         <div class="text-center">
+            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-secondary">
+               <span class="text-2xl font-bold">1</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Consultation & Design</h3>
+            <p class="text-gray-600">We analyze your requirements, provide material samples, and create technical drawings for approval.</p>
+         </div>
+         <div class="text-center">
+            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-secondary">
+               <span class="text-2xl font-bold">2</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Prototyping</h3>
+            <p class="text-gray-600">A mockup room or single unit is produced to verify comfort, durability, and aesthetics before mass production.</p>
+         </div>
+         <div class="text-center">
+            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-secondary">
+               <span class="text-2xl font-bold">3</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Production & QC</h3>
+            <p class="text-gray-600">Skilled craftsmen manufacture your order with rigorous quality checks at every stage.</p>
+         </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Certifications -->
+  <section class="py-16 border-t">
+     <div class="container mx-auto px-6 text-center">
+        <p class="text-gray-500 font-medium uppercase tracking-widest mb-8">Certified Quality</p>
+        <div class="flex flex-wrap justify-center gap-12 grayscale opacity-70">
+           <!-- Placeholders for logos like ISO, FSC, etc. -->
+           <div class="text-2xl font-bold border p-4">ISO 9001</div>
+           <div class="text-2xl font-bold border p-4">ISO 14001</div>
+           <div class="text-2xl font-bold border p-4">FSC Certified</div>
+           <div class="text-2xl font-bold border p-4">SGS Verified</div>
+        </div>
+     </div>
+  </section>
+</Layout>

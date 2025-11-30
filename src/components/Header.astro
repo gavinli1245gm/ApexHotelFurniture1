@@ -1,0 +1,159 @@
+---
+import { siteConfig, navLinks } from '../site.config';
+import { slugify } from '../utils/common';
+
+// Mega Menu Data Structure
+const catalogMenu = [
+  {
+    title: "Hotel Bedroom Furniture",
+    items: ["Hotel Beds", "Headboards", "Nightstands", "Dressers", "TV Cabinets", "Wardrobes", "Writing Desks", "Lounge Chairs", "Full Bedroom Sets"]
+  },
+  {
+    title: "Hotel Lobby Furniture",
+    items: ["Sofas", "Lounge Chairs", "Coffee Tables", "Reception Desks", "Console Tables"]
+  },
+  {
+    title: "Hotel Restaurant Furniture",
+    items: ["Dining Chairs", "Dining Tables", "Booth Seating", "Bar Stools"]
+  },
+  {
+    title: "Hotel Outdoor Furniture",
+    items: ["Outdoor Lounge Chairs", "Patio Tables", "Outdoor Sofas", "Sun Loungers"]
+  },
+  {
+    title: "Custom Hotel Furniture",
+    items: ["Custom Design Service", "Material Options", "Manufacturing Capability", "OEM ODM Service"]
+  },
+  {
+    title: "Hotel Furniture By Space",
+    items: ["Guest Room", "Lobby", "Restaurant", "Suite", "Conference Room", "Outdoor Areas"]
+  }
+];
+---
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center">
+        <a href="/" class="text-2xl font-serif font-bold text-primary tracking-tighter">
+          {siteConfig.name}
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-8 h-full items-center flex-1 justify-center">
+        {navLinks.map((link) => (
+          <div class="relative group h-full flex items-center">
+            <a 
+              href={link.href} 
+              class="text-gray-800 hover:text-secondary px-3 py-2 text-sm font-medium transition-colors flex items-center"
+            >
+              {link.name}
+              {link.name === 'Catalog' && (
+                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              )}
+            </a>
+            
+            {/* Mega Menu for Catalog */}
+            {link.name === 'Catalog' && (
+              <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div class="w-[800px] bg-white shadow-xl rounded-sm border-t-4 border-secondary overflow-hidden">
+                  <div class="p-8">
+                    <div class="grid grid-cols-3 gap-x-8 gap-y-8">
+                      {catalogMenu.map((section) => (
+                        <div>
+                          <h3 class="text-base font-serif font-bold text-primary mb-3 border-b pb-2 border-gray-100">
+                            <a href={`/catalog/${slugify(section.title)}`} class="hover:text-secondary transition-colors">
+                              {section.title}
+                            </a>
+                          </h3>
+                          <ul class="space-y-2">
+                            {section.items.map((item) => (
+                              <li>
+                                <a 
+                                  href={`/catalog/${slugify(section.title)}?sub=${slugify(item)}`} 
+                                  class="text-sm text-gray-500 hover:text-secondary transition-colors block"
+                                >
+                                  {item}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </nav>
+
+      <!-- CTA Button -->
+      <div class="hidden md:flex items-center">
+        <a href="/contact" class="bg-secondary hover:bg-primary text-white text-sm font-bold px-6 py-3 transition-colors duration-300 rounded-sm">
+          Get a Quote
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button type="button" class="mobile-menu-button p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <!-- Icon when menu is closed -->
+          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden hidden max-h-[80vh] overflow-y-auto" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+      {navLinks.map((link) => (
+        <div>
+          <a 
+            href={link.href} 
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-secondary hover:bg-gray-50 font-bold"
+          >
+            {link.name}
+          </a>
+          {/* Mobile Catalog Submenu */}
+          {link.name === 'Catalog' && (
+            <div class="pl-6 space-y-4 py-2">
+              {catalogMenu.map((section) => (
+                 <div>
+                   <h4 class="text-sm font-bold text-gray-900 mb-1">{section.title}</h4>
+                   <ul class="pl-2 border-l-2 border-gray-100 space-y-1">
+                     {section.items.map((item) => (
+                       <li>
+                         <a href={`/catalog/${slugify(section.title)}?sub=${slugify(item)}`} class="block text-sm text-gray-500 py-1">
+                           {item}
+                         </a>
+                       </li>
+                     ))}
+                   </ul>
+                 </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector("button.mobile-menu-button");
+  const menu = document.querySelector("#mobile-menu");
+
+  if (btn && menu) {
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+  }
+</script>

@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import { getCollection } from 'astro:content';
+import { slugify } from '../../utils/common';
+
+const products = await getCollection('products');
+
+// Get unique categories for filter sidebar
+const categories = [...new Set(products.map((product) => product.data.category))];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Hotel Furniture Catalog",
+  "description": "Comprehensive range of hospitality furniture including bedroom sets, lobby furniture, and restaurant seating.",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": categories.map((cat, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": cat,
+      "url": `https://apexhotelfurniture.com/catalog/${slugify(String(cat))}`
+    }))
+  }
+};
+---
+
+<Layout 
+  title="Hotel Furniture Catalog | Bedroom, Lobby & Dining Collections" 
+  description="Browse our comprehensive catalog of hospitality furniture. From guest room casegoods to lobby sofas and restaurant seating."
+  schema={schema}
+>
+  <section class="relative py-24 bg-gray-900 flex items-center justify-center overflow-hidden mb-12">
+    <div class="absolute inset-0 z-0 opacity-30">
+       <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=1920&q=80" alt="Catalog" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative z-10 text-center max-w-4xl px-6">
+      <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Product Catalog</h1>
+      <p class="text-gray-300 text-xl">Explore our comprehensive range of hospitality furniture.</p>
+    </div>
+  </section>
+
+  <div class="container mx-auto px-6 py-12">
+    <div class="flex flex-col lg:flex-row gap-12">
+      <!-- Sidebar Filters -->
+      <aside class="w-full lg:w-1/4">
+        <div class="bg-white p-6 shadow-sm rounded-lg border sticky top-24">
+          <h3 class="text-xl font-bold mb-4 border-b pb-2">Categories</h3>
+          <ul class="space-y-2">
+            <li><a href="/catalog" class="text-secondary font-bold">All Products</a></li>
+            {categories.map((cat) => (
+              <li>
+                <a href={`/catalog/${slugify(String(cat))}`} class="text-gray-600 hover:text-secondary transition-colors">
+                  {cat}
+                </a>
+              </li>
+            ))}
+          </ul>
+          
+          <h3 class="text-xl font-bold mb-4 mt-8 border-b pb-2">By Space</h3>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li><a href="#" class="hover:text-secondary">Guest Room</a></li>
+            <li><a href="#" class="hover:text-secondary">Lobby & Reception</a></li>
+            <li><a href="#" class="hover:text-secondary">Restaurant & Bar</a></li>
+            <li><a href="#" class="hover:text-secondary">Outdoor Areas</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Product Grid -->
+      <main class="w-full lg:w-3/4">
+        <ProductGrid products={products} />
+      </main>
+    </div>
+  </div>
+</Layout>

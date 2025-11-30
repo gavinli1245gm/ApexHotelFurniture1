@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('insights');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Insights & Blog | Apex Hotel Furniture" description="Expert insights on hotel furniture design, trends, and manufacturing.">
+  <!-- Hero -->
+  <section class="relative py-24 bg-gray-900 flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-30">
+       <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=80" alt="Insights" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative z-10 text-center max-w-4xl px-6">
+      <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Insights</h1>
+      <p class="text-gray-300 text-xl">Stay ahead of the curve with the latest trends in hospitality design and furniture manufacturing.</p>
+    </div>
+  </section>
+
+  <div class="container mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {sortedPosts.map((post) => (
+        <article class="flex flex-col bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border">
+          <a href={`/insights/${post.slug}`} class="block aspect-video overflow-hidden">
+             <img 
+               src={post.data.image} 
+               alt={post.data.title} 
+               class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+             />
+          </a>
+          <div class="p-6 flex flex-col flex-grow">
+            <div class="flex items-center text-xs text-gray-500 mb-3 space-x-2">
+              <span>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              <span>&bull;</span>
+              <span>{post.data.author}</span>
+            </div>
+            <h2 class="text-xl font-bold mb-3 font-serif text-primary">
+              <a href={`/insights/${post.slug}`} class="hover:text-secondary transition-colors">
+                {post.data.title}
+              </a>
+            </h2>
+            <p class="text-gray-600 mb-6 line-clamp-3 flex-grow">{post.data.description}</p>
+            <a href={`/insights/${post.slug}`} class="text-secondary font-bold hover:text-primary transition-colors inline-flex items-center">
+              Read Article 
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>
