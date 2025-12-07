@@ -110,38 +110,9 @@ if (product) {
             
             <p class="text-gray-600 text-lg mb-8 leading-relaxed">{product.data.description}</p>
 
-            <div class="bg-gray-50 p-6 rounded-lg border mb-8">
-              <h3 class="font-bold text-lg mb-4">Product Details</h3>
-              <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
-                {product.data.dimensions && (
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Dimensions</dt>
-                    <dd class="mt-1 text-sm text-gray-900">{product.data.dimensions}</dd>
-                  </div>
-                )}
-                {product.data.moq && (
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">MOQ</dt>
-                    <dd class="mt-1 text-sm text-gray-900">{product.data.moq}</dd>
-                  </div>
-                )}
-                {product.data.materials && (
-                  <div class="sm:col-span-2">
-                    <dt class="text-sm font-medium text-gray-500">Materials</dt>
-                    <dd class="mt-1 text-sm text-gray-900">{product.data.materials.join(', ')}</dd>
-                  </div>
-                )}
-              </dl>
-            </div>
-
-            <div class="flex gap-4">
-              <a href="/contact" class="flex-1 bg-secondary text-white text-center px-8 py-4 text-lg font-bold hover:bg-primary transition-colors shadow-lg">
-                Request a Quote
-              </a>
-              <button class="px-8 py-4 border-2 border-gray-300 text-gray-700 font-bold hover:border-primary hover:text-primary transition-colors">
-                Download Spec
-              </button>
-            </div>
+            <a href="/contact" class="block w-full bg-secondary text-white text-center px-8 py-4 text-lg font-bold hover:bg-primary transition-colors shadow-lg">
+              Request a Quote
+            </a>
           </div>
         </div>
 
